@@ -131,33 +131,30 @@ export default function Produtos() {
     };
 
     const excluirProduto = async (codigo) => {
-        if (!window.confirm("Tem certeza que deseja excluir este produto?")) {
-            return;
-        }
-    
         try {
-            const response = await fetch(
-                'https://ec2-44-199-209-196.compute-1.amazonaws.com:8443/produtos/${codigoProduto}',
-                {
-                    method: "DELETE",
-                }
-            );
-    
-            if (response.ok) {
-                alert("Produto excluído com sucesso!");
-                // Atualiza a lista de produtos após a exclusão
-                setProdutos(produtos.filter((produto) => produto.loja !== codigo));
-                setProdutosFiltrados(
-                    produtosFiltrados.filter((produto) => produto.loja !== codigo)
-                );
-            } else {
-                alert("Erro ao excluir o produto. Verifique se ele ainda existe.");
+          const response = await fetch(
+            'https://ec2-44-199-209-196.compute-1.amazonaws.com:8443/produtos/${codigo}',
+            {
+              method: "DELETE",
             }
+          );
+      
+          if (response.ok) {
+            // Atualiza a lista de produtos após excluir o produto
+            setProdutosFiltrados((prevProdutos) => 
+              prevProdutos.filter((produto) => produto.codigo !== codigo) // Filtra o produto excluído
+            );
+            alert("Produto excluído com sucesso!");
+          } else {
+            const errorData = await response.json();
+            console.error("Erro ao excluir:", errorData);
+            alert("Erro ao excluir o produto.");
+          }
         } catch (error) {
-            console.error("Erro ao excluir o produto:", error);
-            alert("Erro ao tentar excluir o produto.");
+          console.error("Erro na exclusão:", error);
+          alert("Erro ao excluir o produto.");
         }
-    };
+      };
 
     const filtrarPorPreco = (tipo) => {
         const filtrados = [...produtos].sort((a, b) =>
