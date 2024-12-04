@@ -55,7 +55,7 @@ export default function Produtos() {
     });
 
     useEffect(() => {
-        fetch('https://ec2-44-199-209-196.compute-1.amazonaws.com:8443/produtos/ordenadosPorNome')
+        fetch('http://ec2-44-199-209-196.compute-1.amazonaws.com:8080/produtos/ordenadosPorNome')
             .then((res) => res.json())
             .then((data) => {
                 setProdutos(data);
@@ -71,13 +71,13 @@ export default function Produtos() {
     }, []);
     
     const fetchValorTotalEstoque = async () => {
-        const reponse = await fetch('https://ec2-44-199-209-196.compute-1.amazonaws.com:8443/produtos/valorTotalEstoque');
+        const reponse = await fetch('http://ec2-44-199-209-196.compute-1.amazonaws.com:8080/produtos/valorTotalEstoque');
         const data = await reponse.json();
         setValorTotalEstoque(data);
     };
 
     const fetchLojas = async () => {
-        fetch('https://ec2-44-199-209-196.compute-1.amazonaws.com:8443/lojas')
+        fetch('http://ec2-44-199-209-196.compute-1.amazonaws.com:8080/lojas')
             .then((res) => res.json())
             .then((data) => {
                 const lojasCorrigidas = data.map((loja) => {
@@ -107,7 +107,7 @@ export default function Produtos() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('https://ec2-44-199-209-196.compute-1.amazonaws.com:8443/produtos', {
+            const response = await fetch('http://ec2-44-199-209-196.compute-1.amazonaws.com:8080/produtos', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -133,7 +133,7 @@ export default function Produtos() {
     const excluirProduto = async (codigo) => {
         try {
           const response = await fetch(
-            'https://ec2-44-199-209-196.compute-1.amazonaws.com:8443/produtos/${codigo}',
+            'http://ec2-44-199-209-196.compute-1.amazonaws.com:8080/produtos/${codigo}',
             {
               method: "DELETE",
             }
@@ -181,7 +181,7 @@ export default function Produtos() {
 
     useEffect(() => {
         if (lojaId) {
-            fetch(`https://ec2-44-199-209-196.compute-1.amazonaws.com:8443/produtos?lojaId=${lojaId}`)
+            fetch(`http://ec2-44-199-209-196.compute-1.amazonaws.com:8080/produtos?lojaId=${lojaId}`)
                 .then((res) => res.json())
                 .then((data) => setProdutos(data))
                 .catch((error) => console.error('Erro ao buscar produtos:', error));
@@ -198,7 +198,7 @@ export default function Produtos() {
     
             // Primeira chamada: Atualizar o produto
             const atualizarResponse = await fetch(
-                `https://ec2-44-199-209-196.compute-1.amazonaws.com:8443/estoque/atualizar/${produto.codigoProduto}`,
+                `http://ec2-44-199-209-196.compute-1.amazonaws.com:8080/estoque/atualizar/${produto.codigoProduto}`,
                 {
                     method: 'PUT',
                     headers: {
@@ -219,7 +219,7 @@ export default function Produtos() {
             // Segunda chamada: Associar o produto a uma loja
             if (produto.lojaId) {
                 const associarResponse = await fetch(
-                    `https://ec2-44-199-209-196.compute-1.amazonaws.com:8443/estoque/associarProduto?lojaId=${produto.lojaId}`,
+                    `http://ec2-44-199-209-196.compute-1.amazonaws.com:8080/estoque/associarProduto?lojaId=${produto.lojaId}`,
                     {
                         method: 'POST',
                         headers: {
