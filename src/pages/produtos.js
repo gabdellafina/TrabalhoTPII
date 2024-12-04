@@ -567,7 +567,7 @@ export default function Produtos() {
                             >
                                 <td className="px-6 py-4">
                                     <button
-                                        onClick={() => excluirProduto(produto.codigoProduto)}
+                                        onClick={() => excluirProduto(produto.codigo)}
                                         className="bg-red-500 hover:bg-red-600 text-white font-medium py-1 px-3 rounded"
                                     >
                                         Excluir
