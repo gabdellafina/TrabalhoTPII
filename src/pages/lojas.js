@@ -19,7 +19,7 @@ export default function Lojas() {
 
 
       useEffect(() => {
-        fetch('https://ec2-44-199-209-196.compute-1.amazonaws.com:8443/lojas')
+        fetch('http://ec2-44-199-209-196.compute-1.amazonaws.com:8080/lojas')
             .then((res) => res.json())
             .then((data) => {
                 const lojasCorrigidas = data.map((loja) => {
@@ -45,7 +45,7 @@ export default function Lojas() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('https://ec2-44-199-209-196.compute-1.amazonaws.com:8080/lojas/adicionar', {
+            const response = await fetch('http://ec2-44-199-209-196.compute-1.amazonaws.com:8080/lojas/adicionar', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -87,7 +87,7 @@ export default function Lojas() {
     };
 
     useEffect(() => {
-        fetch('https://ec2-44-199-209-196.compute-1.amazonaws.com:8443/lojas/listarProdutosPorLoja')
+        fetch('http://ec2-44-199-209-196.compute-1.amazonaws.com:8080/lojas/listarProdutosPorLoja')
             .then((res) => res.json())
             .then((data) => {
                 
@@ -99,7 +99,7 @@ export default function Lojas() {
         <div className="min-h-screen bg-gray-900 text-white p-8">
             {/* Navegação */}
             <nav className="flex justify-between p-5 items-center">
-                <a href="/index" className="ml-1 flex items-center gap-2">
+                <a href="/homepage" className="ml-1 flex items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-4">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
                     </svg>
