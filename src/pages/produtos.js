@@ -137,7 +137,7 @@ export default function Produtos() {
     
         try {
             const response = await fetch(
-                'https://ec2-44-199-209-196.compute-1.amazonaws.com:8443/produtos/${codigo}',
+                'https://ec2-44-199-209-196.compute-1.amazonaws.com:8443/produtos/${codigoProduto}',
                 {
                     method: "DELETE",
                 }
@@ -567,7 +567,7 @@ export default function Produtos() {
                             >
                                 <td className="px-6 py-4">
                                     <button
-                                        onClick={() => excluirProduto(produto.codigo)}
+                                        onClick={() => excluirProduto(produto.codigoProduto)}
                                         className="bg-red-500 hover:bg-red-600 text-white font-medium py-1 px-3 rounded"
                                     >
                                         Excluir
